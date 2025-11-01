@@ -83,65 +83,98 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📁 Project Structure
 
-\`\`\`
-src/
-├── app/                      # Next.js App Router
-│   ├── api/                  # API routes
-│   │   └── example/          # Example protected API
-│   ├── auth/                 # Authentication pages
-│   │   ├── login/            # Login page
-│   │   ├── sign-up/          # Sign up page
-│   │   ├── forgot-password/  # Password reset
-│   │   ├── update-password/  # Update password
-│   │   ├── confirm/          # Email confirmation
-│   │   └── error/            # Auth error page
-│   ├── protected/            # Protected pages
-│   ├── layout.tsx            # Root layout
-│   ├── page.tsx              # Home page
-│   ├── loading.tsx           # Loading UI
-│   ├── error.tsx             # Error boundary
-│   └── globals.css           # Global styles
-├── components/
-│   ├── auth/                 # Auth components
-│   │   ├── auth-button.tsx
-│   │   ├── login-form.tsx
-│   │   ├── sign-up-form.tsx
-│   │   ├── forgot-password-form.tsx
-│   │   ├── update-password-form.tsx
-│   │   ├── logout-button.tsx
+```
+my-app/
+├── src/
+│   ├── app/                          # Next.js App Router
+│   │   ├── api/
+│   │   │   └── example/              # Example protected API route
+│   │   ├── auth/                     # Authentication pages
+│   │   │   ├── confirm/              # Email confirmation handler
+│   │   │   ├── error/                # Auth error page
+│   │   │   ├── forgot-password/      # Password reset request
+│   │   │   ├── login/                # Login page
+│   │   │   ├── sign-up/              # Sign up page
+│   │   │   ├── sign-up-success/      # Post-signup success page
+│   │   │   └── update-password/      # Password update page
+│   │   ├── protected/                # Protected pages (requires auth)
+│   │   │   ├── layout.tsx
+│   │   │   ├── loading.tsx
+│   │   │   └── page.tsx
+│   │   ├── error.tsx                 # Global error boundary
+│   │   ├── favicon.ico
+│   │   ├── globals.css               # Global styles
+│   │   ├── layout.tsx                # Root layout with metadata
+│   │   ├── loading.tsx               # Global loading UI
+│   │   ├── opengraph-image.png       # OG image for social sharing
+│   │   ├── page.tsx                  # Home page
+│   │   └── twitter-image.png
+│   ├── components/
+│   │   ├── auth/                     # Authentication components
+│   │   │   ├── auth-button.tsx
+│   │   │   ├── forgot-password-form.tsx
+│   │   │   ├── login-form.tsx
+│   │   │   ├── logout-button.tsx
+│   │   │   ├── sign-up-form.tsx
+│   │   │   ├── update-password-form.tsx
+│   │   │   └── index.ts
+│   │   ├── layout/                   # Layout components
+│   │   │   ├── theme-switcher.tsx    # Dark/light mode toggle
+│   │   │   ├── toaster.tsx           # Toast notifications
+│   │   │   └── index.ts
+│   │   ├── ui/                       # shadcn/ui components
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── label.tsx
+│   │   │   ├── spinner.tsx
+│   │   │   └── index.ts
+│   │   └── index.ts                  # Central barrel export
+│   ├── lib/
+│   │   ├── supabase/                 # Supabase client setup
+│   │   │   ├── client.ts             # Browser client
+│   │   │   ├── config-check.ts       # Config validation
+│   │   │   ├── middleware.ts         # Auth middleware utilities
+│   │   │   ├── server.ts             # Server-side client
+│   │   │   └── index.ts
+│   │   ├── env.ts                    # Environment validation (Zod)
+│   │   ├── rate-limit.ts             # API rate limiting
+│   │   ├── utils.ts                  # Utility functions (cn, etc.)
 │   │   └── index.ts
-│   ├── layout/               # Layout components
-│   │   ├── theme-switcher.tsx
-│   │   ├── toaster.tsx
+│   ├── constants/
+│   │   ├── metadata.ts               # App metadata & SEO
+│   │   ├── routes.ts                 # Type-safe route definitions
 │   │   └── index.ts
-│   ├── ui/                   # shadcn/ui components
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── input.tsx
-│   │   ├── label.tsx
-│   │   ├── dropdown-menu.tsx
-│   │   ├── spinner.tsx
-│   │   └── index.ts
-│   └── index.ts              # Central barrel export
-├── lib/
-│   ├── supabase/             # Supabase setup
-│   │   ├── client.ts         # Browser client
-│   │   ├── server.ts         # Server client
-│   │   ├── middleware.ts     # Middleware utilities
-│   │   ├── config-check.ts   # Config validation
-│   │   └── index.ts
-│   ├── env.ts                # Environment validation (Zod)
-│   ├── rate-limit.ts         # Rate limiting utilities
-│   ├── utils.ts              # Helper functions (cn, etc.)
-│   └── index.ts
-├── constants/
-│   ├── routes.ts             # Type-safe route definitions
-│   ├── metadata.ts           # App metadata & SEO
-│   └── index.ts
-└── hooks/
-    └── index.ts              # Custom React hooks
-middleware.ts                 # Next.js middleware (auth)
-\`\`\`
+│   └── hooks/
+│       └── index.ts                  # Custom React hooks
+├── docs/                             # Documentation
+│   ├── CHANGELOG.md
+│   ├── LICENSE
+│   └── SETUP.md
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   ├── workflows/
+│   │   └── ci.yml                    # GitHub Actions CI/CD
+│   └── pull_request_template.md
+├── .vscode/
+│   ├── extensions.json
+│   └── settings.json
+├── middleware.ts                     # Next.js middleware (auth)
+├── .editorconfig
+├── .env.example
+├── .eslintrc.json
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── components.json                   # shadcn/ui config
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── tailwind.config.ts
+└── tsconfig.json
+```
 
 ## 🧰 Available Scripts
 
