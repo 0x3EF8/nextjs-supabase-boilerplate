@@ -1,0 +1,34 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.next
+.turbo
+dist
+build
+out
+
+# Testing
+coverage
+
+# Logs
+*.log
+
+# Environment
+.env
+.env*.local
+
+# Deployment
+.vercel
+
+# IDE
+.vscode
+.idea
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
