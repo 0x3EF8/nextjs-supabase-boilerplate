@@ -24,14 +24,16 @@
 ## ✨ Features
 
 - ⚡ **Next.js 16** with App Router and Turbopack
-- 🔐 **Complete Authentication** - Sign up, login, password reset
+- 🔐 **Complete Authentication** - Sign up, login, password reset, email confirmation
 - 💾 **Supabase** - PostgreSQL database with Row Level Security
 - 🎨 **Tailwind CSS 4** - Modern styling with dark/light mode
-- 🧩 **shadcn/ui** - Beautiful, accessible components
-- 📝 **TypeScript** - Full type safety
-- ✅ **Form Validation** - React Hook Form + Zod
-- 🛡️ **Rate Limiting** - Built-in protection
-- 🧪 **Testing Ready** - Vitest + Testing Library setup
+- 🧩 **shadcn/ui** - Beautiful, accessible Radix UI components
+- 📝 **TypeScript** - Full type safety with strict mode
+- ✅ **Form Validation** - React Hook Form + Zod 4.x
+- 🛡️ **Rate Limiting** - Built-in API protection
+- 🎯 **ESLint + Prettier** - Code quality and formatting
+- 🌐 **Middleware** - Authentication and session management
+- 🎨 **Modern UI** - Gradient effects, icons, and animations
 - 📱 **Responsive** - Mobile-first design
 
 ## 📋 Prerequisites
@@ -83,20 +85,62 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 \`\`\`
 src/
-├── app/ # Next.js App Router pages
-│ ├── api/ # API routes
-│ ├── auth/ # Authentication pages
-│ └── protected/ # Protected pages
-├── components/ # React components
-│ └── ui/ # Reusable UI components
-├── lib/ # Utilities and helpers
-│ ├── supabase/ # Supabase client setup
-│ ├── env.ts # Environment validation
-│ ├── rate-limit.ts # Rate limiting
-│ └── utils.ts # Helper functions
-├── config/ # App configuration
-├── hooks/ # Custom React hooks
-└── types/ # TypeScript types
+├── app/                      # Next.js App Router
+│   ├── api/                  # API routes
+│   │   └── example/          # Example protected API
+│   ├── auth/                 # Authentication pages
+│   │   ├── login/            # Login page
+│   │   ├── sign-up/          # Sign up page
+│   │   ├── forgot-password/  # Password reset
+│   │   ├── update-password/  # Update password
+│   │   ├── confirm/          # Email confirmation
+│   │   └── error/            # Auth error page
+│   ├── protected/            # Protected pages
+│   ├── layout.tsx            # Root layout
+│   ├── page.tsx              # Home page
+│   ├── loading.tsx           # Loading UI
+│   ├── error.tsx             # Error boundary
+│   └── globals.css           # Global styles
+├── components/
+│   ├── auth/                 # Auth components
+│   │   ├── auth-button.tsx
+│   │   ├── login-form.tsx
+│   │   ├── sign-up-form.tsx
+│   │   ├── forgot-password-form.tsx
+│   │   ├── update-password-form.tsx
+│   │   ├── logout-button.tsx
+│   │   └── index.ts
+│   ├── layout/               # Layout components
+│   │   ├── theme-switcher.tsx
+│   │   ├── toaster.tsx
+│   │   └── index.ts
+│   ├── ui/                   # shadcn/ui components
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── input.tsx
+│   │   ├── label.tsx
+│   │   ├── dropdown-menu.tsx
+│   │   ├── spinner.tsx
+│   │   └── index.ts
+│   └── index.ts              # Central barrel export
+├── lib/
+│   ├── supabase/             # Supabase setup
+│   │   ├── client.ts         # Browser client
+│   │   ├── server.ts         # Server client
+│   │   ├── middleware.ts     # Middleware utilities
+│   │   ├── config-check.ts   # Config validation
+│   │   └── index.ts
+│   ├── env.ts                # Environment validation (Zod)
+│   ├── rate-limit.ts         # Rate limiting utilities
+│   ├── utils.ts              # Helper functions (cn, etc.)
+│   └── index.ts
+├── constants/
+│   ├── routes.ts             # Type-safe route definitions
+│   ├── metadata.ts           # App metadata & SEO
+│   └── index.ts
+└── hooks/
+    └── index.ts              # Custom React hooks
+middleware.ts                 # Next.js middleware (auth)
 \`\`\`
 
 ## 🧰 Available Scripts
@@ -104,10 +148,12 @@ src/
 - `npm run dev` - Start development server with Turbopack
 - `npm run build` - Create production build
 - `npm run start` - Start production server
-- `npm run lint` - Run linters and type check
-- `npm run lint:fix` - Auto-fix linting issues
+- `npm run eslint` - Run ESLint checks
+- `npm run eslint:fix` - Auto-fix linting issues
+- `npm run type-check` - Run TypeScript type checking
 - `npm run format` - Format code with Prettier
-- `npm test` - Run tests (after installing test dependencies)
+- `npm run format:check` - Check code formatting
+- `npm run clean` - Remove build artifacts and node_modules
 
 ## 🔐 Authentication
 
@@ -160,28 +206,10 @@ npx shadcn@latest add button
 
 [Browse components](https://ui.shadcn.com/docs/components)
 
-## 🧪 Testing (Optional Setup)
-
-Install test dependencies:
-
-\`\`\`bash
-npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom
-\`\`\`
-
-Add test script to `package.json`:
-
-\`\`\`json
-"scripts": {
-"test": "vitest",
-"test:ui": "vitest --ui"
-}
-\`\`\`
-
-## � Documentation
+## 📚 Documentation
 
 - **[Setup Guide](docs/SETUP.md)** - Complete setup checklist
-- **[Project Structure](docs/STRUCTURE.md)** - Codebase organization
-- **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute
+- **[Changelog](docs/CHANGELOG.md)** - Version history and updates
 
 ## �🚀 Deployment
 
@@ -237,19 +265,23 @@ Built with these amazing technologies:
 - [shadcn/ui](https://ui.shadcn.com) - Beautiful components
 - [TypeScript](https://www.typescriptlang.org) - Type safety
 
-## � License
+## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [docs/LICENSE](docs/LICENSE) file for details.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+Contributions are welcome! Here's how to contribute:
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+3. Commit your changes using [Conventional Commits](https://www.conventionalcommits.org/)
+   - `feat:` for new features
+   - `fix:` for bug fixes
+   - `docs:` for documentation changes
+   - `chore:` for maintenance tasks
 4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+5. Open a Pull Request with a clear description
 
 ## 💬 Support
 
@@ -265,7 +297,7 @@ If you find this project helpful, please consider giving it a star on GitHub!
 ---
 
 <div align="center">
-  <p>>///<</p>
+  <p>Built with ❤️ by developers, for developers</p>
   <p>
     <a href="https://github.com/0x3EF8">GitHub</a>
   </p>
