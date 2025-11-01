@@ -45,39 +45,39 @@
 
 ### 1. Clone and Install
 
-\`\`\`bash
+```bash
 git clone https://github.com/0x3EF8/nextjs-supabase-boilerplate.git
 cd nextjs-supabase-boilerplate
 npm install
-\`\`\`
+```
 
 ### 2. Set Up Supabase
 
 1. Create a new project at [supabase.com](https://supabase.com)
-2. Go to Project Settings → API
-3. Copy your project URL and anon/public key
+2. Go to **Project Settings** → **API**
+3. Copy your **Project URL** and **anon/public key**
 
 ### 3. Configure Environment Variables
 
 Copy the example environment file:
 
-\`\`\`bash
+```bash
 cp .env.example .env.local
-\`\`\`
+```
 
 Edit `.env.local` and add your Supabase credentials:
 
-\`\`\`env
+```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-\`\`\`
+```
 
 ### 4. Run Development Server
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
@@ -202,40 +202,40 @@ The boilerplate includes:
 
 Add authentication to any page:
 
-\`\`\`tsx
+```tsx
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function ProtectedPage() {
-const supabase = await createClient();
-const { data, error } = await supabase.auth.getClaims();
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getClaims();
 
-if (error || !data?.claims) {
-redirect('/auth/login');
-}
+  if (error || !data?.claims) {
+    redirect('/auth/login');
+  }
 
-return <div>Protected content</div>;
+  return <div>Protected content</div>;
 }
-\`\`\`
+```
 
 ## 🗄️ Database
 
 Use Supabase client to interact with your database:
 
-\`\`\`tsx
+```tsx
 const supabase = await createClient();
 const { data, error } = await supabase
-.from('your_table')
-.select('\*');
-\`\`\`
+  .from('your_table')
+  .select('*');
+```
 
 ## 🎨 UI Components
 
 Built with shadcn/ui. Add new components:
 
-\`\`\`bash
+```bash
 npx shadcn@latest add button
-\`\`\`
+```
 
 [Browse components](https://ui.shadcn.com/docs/components)
 
